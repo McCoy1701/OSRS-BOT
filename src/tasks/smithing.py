@@ -1,35 +1,14 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from src.utils.detection import imageToText, imageRectSingle, inventCount, imageCount, findObjectPrecise
-from src.utils.screen import workAreaImage, resizeImage, inventCrop
-from src.utils.bank import depositSecondItem, exitBank
-from src.utils.breaks import randomBreaks, randomizer
-from src.utils.support import spaces, pickItem
+from src.utils.detection import imageToText, imageRectSingle, inventCount, imageCount
+from src.utils.colorDetection import findObject
+from src.utils.window import workAreaImage, actionImage, inventCrop
+from src.utils.breaks import randomBreaks, randomizer, timer
+from src.utils.support import spaces, moveToClick, pressKey
 
 j = 0
 
-def bankSpotEdgeVille():
-    findObjectPrecise(1)
-
-def bankSpotVarrock():
-    findObjectPrecise(2)
-
-def waterSpotEdgeVille():
-    findObjectPrecise(0, 0, 0, 610, 775)
-
-def smithSpotVarrock():
-    findObjectPrecise(0, 0, 0, 610, 775)
-
-def buckObject(type):
-    imageRectSingle(type, 5, 5, 0.8, 'left', 10)
-
-def smithObject(type):
-    imageRectSingle(type, 10, 10, 0.8, 'left', 10)
-
-# def getBuckets(item):
-
-# def waterMoneyMaker(num, item):
 
 def smithItems(amount, bar, cost, item):
     i = round((amount * cost) / 27) + 1
@@ -65,4 +44,4 @@ def smithItems(amount, bar, cost, item):
             inv = imageCount(barList[bar])
         j -= 1
 
-resizeImage()
+

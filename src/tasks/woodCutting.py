@@ -34,6 +34,29 @@ def countNests():
     return inventCount('birdNest.png')
 
 
+def moveDepositAll():
+    bX = random.randrange(455 - 5, 455 + 5)
+    bY = random.randrange(379 - 5, 379 + 5)
+    moveToClick(bX, bY, (0.1, 0.3), (0.05, 0.15))
+
+
+def closeButton():
+    x = random.randrange(496 - 5, 496 + 5)
+    y = random.randrange(87 - 5, 87 + 5)
+    moveToClick(x, y, (0.1, 0.3), (0.05, 0.15))
+
+
+def doBanking():
+    global j
+    moveDepositAll()
+    randomBreaks(1, 2)
+
+    closeButton()
+    randomBreaks(1, 2)
+    j += 1
+    print(f'banked {j} times')
+
+
 def dropWood(type):
     global j
     print(f'Dropping...')
@@ -46,7 +69,7 @@ def dropWood(type):
 
 
 def powerWoodcutting(type, logs):
-    global timerBreak, iBreak, j
+    global timerBreak, iBreak
     while True:
         randomizer(timerBreak, iBreak)
         log = countLogs(logs)
@@ -58,33 +81,21 @@ def powerWoodcutting(type, logs):
         if inventory > 27:
             # pointNorth()
             randomBreaks(0.5, 1)
+            findObject(4)
 
-            findObject(0)
-            # dropWood(logs)
             randomBreaks(9, 10)
-
-            bX = random.randrange(455 - 5, 455 + 5)
-            bY = random.randrange(379 - 5, 379 + 5)
-            moveToClick(bX, bY, (0.1, 0.3), (0.05, 0.15))
-            randomBreaks(1, 2)
-
-            x = random.randrange(496 - 5, 496 + 5)
-            y = random.randrange(87 - 5, 87 + 5)
-            moveToClick(x, y, (0.1,0.3), (0.05, 0.15))
-            randomBreaks(1, 2)
-            j += 1
-            print(f'banked {j} times')
+            # dropWood(logs)
+            doBanking()
 
 
         actionImage()
         status = imageToText('thresh', f'{TEMP}actionScaled.png')
-        text = status.strip('~-')
+        text = status.strip('~-—')
         # print(f'{text}')
 
         if text.lower() != 'woodcutting':
             # print(f'{text.lower()}')
             findObject(type)
-            # print('found log')
             randomBreaks(6, 9)
 
         if skillLevelUp() != 0:

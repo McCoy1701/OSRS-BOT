@@ -1,4 +1,5 @@
 import win32gui
+from time import sleep
 from .settings import *
 from PIL import Image, ImageGrab
 
@@ -75,8 +76,12 @@ def workAreaImage():
 
 
 def actionImage():
-    action = screenshotWin(35, 90, 132, 110, 'action.png')
+    action = screenshotWin(40, 90, 135, 115, 'action.png')
     return scaleImage(action)
+
+def attackImage():
+    attack = screenshotWin(75, 90, 100, 110, 'attack.png')
+    return scaleImage(attack)
 
 
 def scaleImage(img):
@@ -85,12 +90,13 @@ def scaleImage(img):
     newSize = (width * 6, height * 6)
     iml = im.resize(newSize)
     text = img.rsplit('.', 1)
-    iml.save(f'{text[0]}Scaled.png')
+    sleep(0.01)
+    iml.save(fr'{text[0]}Scaled.png')
     return iml
 
 
 def __save(image, name):
-    image.save(rf'{TEMP}{name}')
+    image.save(fr'{TEMP}{name}')
     return f'{TEMP}{name}'
 
 

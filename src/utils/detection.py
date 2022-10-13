@@ -1,5 +1,5 @@
 import numpy as np
-import cv2, pyautogui, random, win32gui, os, pytesseract
+import cv2, pyautogui, random, win32gui, os, pytesseract, atexit
 from PIL import Image
 from .window import screenshotWin, workAreaImage, inventCrop
 from .support import moveToClick
@@ -23,12 +23,13 @@ def imageToText(preprocess, image, parse_config = '--psm 8') -> str:
         GRAY = cv2.adaptiveThreshold(GRAY, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
 
     filename = '{}.png'.format(os.getpid())
-    cv2.imwrite(filename, GRAY)
+    cv2.imwrite(f'{TEMP}{filename}', GRAY)
 
-    with Image.open(filename) as im:
+    with Image.open(f'{TEMP}{filename}') as im:
         text = pytesseract.image_to_string(im, config=parse_config)
 
-    os.remove(filename)
+    if os.path.exists(fr'{TEMP}{filename}'):
+        os.remove(fr'{TEMP}{filename}')
     newText = "".join(text.split())
     return newText
 

@@ -23,8 +23,8 @@ def randomInvo(text, button):
 
 
 def randomPause():
-    b = random.uniform(20, 250)
-    print(f'Random Pause for {str(b)}')
+    b = random.uniform(20, 80)
+    print(f'Random Pause for {str(b)} secs')
     time.sleep(b)
     return True
 
