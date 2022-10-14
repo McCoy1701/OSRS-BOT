@@ -3,13 +3,15 @@ from utils.window import setWindow
 # from tasks.mining import powerMiner
 # from tasks.combat import powerAttack
 # from tasks.fishing import powerFisher
+# from tasks.gatherPickaxe import gatherPickaxes
 from tasks.smithing import smithItems
-from utils.colorDetection import findObjectPrecise
+from tasks.rommikTrader import trader
 
 
 def main():
     setWindow('RuneLite')
-    # findObjectPrecise(1)
+    trader()
+    # gatherPickaxes()
     # smithItems(4, 1)
     # powerWoodcutting(3, 'willow')
     # powerAttack('cow')

@@ -70,6 +70,13 @@ def spaces(a):
         pressKey('space', 0.05, 0.1)
 
 
+def shiftClick(x, y):
+    pyautogui.keyDown('shift')
+    moveToClick(x, y, (0.02, 0.07), (0.01, 0.05))
+    randomBreaks(0.1, 0.5)
+    pyautogui.keyUp('shift')
+
+
 def logMsg(msg: str, overwrite: bool = False):
     if not overwrite:
         print(msg)
