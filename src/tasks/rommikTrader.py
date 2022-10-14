@@ -8,13 +8,25 @@ from src.utils.window import screenshotWin
 from src.utils.breaks import randomBreaks, _randomBreak, timer
 from src.utils.support import spaces, moveToClick, shiftClick, toggleRun, logMsg
 
+
+def randomizer(timerBreaks, iBreaks):
+    global timerBreak, iBreak
+    # test = timer()
+    # print(f'{iBreaks, timerBreaks} test: {test - timerBreaks} {test - timerBreaks > iBreaks}')
+    if _randomBreak(timerBreaks, iBreaks):
+        timerBreak = timer()
+        iBreak = random.randrange(300, 600)
+
+
 def clickSpot(a, b):
     x = random.randrange(a - 1, a + 1)
     y = random.randrange(b - 1, b + 1)
     shiftClick(x, y)
 
+
 def trader():
     while True:
+        randomizer(timerBreak, iBreak)
         randomBreaks(0.5, 1)
         findObjectPrecise(5)
         logMsg('Finding Rommik', True)
@@ -26,8 +38,8 @@ def trader():
             logMsg('Buying Needles', True)
             randomBreaks(1, 2)
 
-            logMsg('Buying Threads', True)
-            for x in range(6):
+            for x in range(10):
+                logMsg(f'Buying Threads {x + 1}', True)
                 randomBreaks(0.1, 0.2)
                 clickSpot(339, 148)
 
@@ -37,9 +49,14 @@ def trader():
 
             randomBreaks(1, 2)
             pyautogui.press('num1')
-            logMsg('Hop world', True)
+            logMsg('Hopping worlds', True)
             randomBreaks(10, 15)
 
         else:
+            logMsg('Miss click', True)
             continue
+
+
+timerBreak = timer()
+iBreak = random.randrange(300, 600)
 

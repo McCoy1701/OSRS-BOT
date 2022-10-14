@@ -10,9 +10,9 @@ from tasks.rommikTrader import trader
 
 def main():
     setWindow('RuneLite')
-    trader()
+    smithItems(4, 1)
+    # trader()
     # gatherPickaxes()
-    # smithItems(4, 1)
     # powerWoodcutting(3, 'willow')
     # powerAttack('cow')
     # powerFisher('salmon', 2)

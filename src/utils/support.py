@@ -1,4 +1,4 @@
-import pyautogui, random
+import pyautogui, random, os
 from .breaks import randomBreaks
 
 
@@ -27,21 +27,21 @@ def releaseDropItem():
 
 
 def pickItem(v, u):
-    x = random.randrange(v - 5, v + 5)
-    y = random.randrange(u - 5, u + 5)
+    x = random.randrange(v - 7, v + 7)
+    y = random.randrange(u - 7, u + 7)
     moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
     # print(f'Picked Item: X, Y: {x, y}')
 
 
 def pointNorth():
-    x = random.randrange(617 - 5, 617 + 5)
-    y = random.randrange(89 - 5, 89 + 5)
+    x = random.randrange(617 - 10, 617 + 10)
+    y = random.randrange(89 - 10, 89 + 10)
     moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
 
 
 def toggleRun():
-    x = random.randrange(580 - 5, 580 + 5)
-    y = random.randrange(191 - 5, 191 + 5)
+    x = random.randrange(580 - 10, 580 + 10)
+    y = random.randrange(191 - 10, 191 + 10)
     moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
 
 
@@ -79,7 +79,7 @@ def shiftClick(x, y):
 
 def logMsg(msg: str, overwrite: bool = False):
     if not overwrite:
-        print(msg)
+        print(f'\n{msg}')
 
     else:
         print(f'\r{msg}', end='')

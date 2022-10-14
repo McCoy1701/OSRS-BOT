@@ -8,6 +8,16 @@ from src.utils.window import screenshotWin
 from src.utils.breaks import randomBreaks, _randomBreak, timer
 from src.utils.support import spaces, moveToClick, pressKey, toggleRun, logMsg, dropItem, releaseDropItem
 
+
+def randomizer(timerBreaks, iBreaks):
+    global timerBreak, iBreak
+    # test = timer()
+    # print(f'{iBreaks, timerBreaks} test: {test - timerBreaks} {test - timerBreaks > iBreaks}')
+    if _randomBreak(timerBreaks, iBreaks):
+        timerBreak = timer()
+        iBreak = random.randrange(300, 600)
+
+
 def clickSpot(a, b):
     x = random.randrange(a - 1, a + 1)
     y = random.randrange(b - 1, b + 1)
@@ -15,6 +25,8 @@ def clickSpot(a, b):
 
 def gatherPickaxes():
     while True:
+        randomizer(timerBreak, iBreak)
+
         toggleRun()
         randomBreaks(0.5, 1)
 
@@ -71,4 +83,8 @@ def gatherPickaxes():
                 depositSecondItem()
                 logMsg('Deposit items', True)
             invo = inventCount('bronzePickaxe.png')
+
+
+timerBreak = timer()
+iBreak = random.randrange(300, 600)
 
