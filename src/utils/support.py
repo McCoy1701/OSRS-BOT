@@ -27,7 +27,7 @@ def releaseDropItem():
 
 
 def pickItem(v, u):
-    x = random.randrange(v - 10, v + 10)
+    x = random.randrange(v - 5, v + 5)
     y = random.randrange(u - 5, u + 5)
     moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
     # print(f'Picked Item: X, Y: {x, y}')
@@ -40,6 +40,8 @@ def pointNorth():
 
 
 def toggleRun():
+    x = random.randrange(580 - 5, 580 + 5)
+    y = random.randrange(191 - 5, 191 + 5)
     moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
 
 
@@ -64,11 +66,14 @@ def panRight():
 
 
 def spaces(a):
-    if a == 0:
-        return
-    if a == 1:
+    for x in range(a):
         pressKey('space', 0.05, 0.1)
-    if a == 2:
-        for x in range(a):
-            pressKey('space', 0.05, 0.1)
+
+
+def logMsg(msg: str, overwrite: bool = False):
+    if not overwrite:
+        print(msg)
+
+    else:
+        print(f'\r{msg}', end='')
 

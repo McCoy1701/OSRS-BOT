@@ -34,33 +34,26 @@ def imageToText(preprocess, image, parse_config = '--psm 8') -> str:
     return newText
 
 
-def imageRectSingle(image, iHeight, iWidth, threshold, clicker, iSpace = 20, cropX = 0, cropY = 0) -> None:
-    workAreaImage()
-    loc, w, h, imgBGR = convertToGrayscale(f'{TEMP}workArea.png', f'{IMAGES}{image}', threshold)
+def imageRectSingle(image, func, iHeight, iWidth, threshold, clicker = 'left', iSpace = 5, cropX = 10, cropY = 40) -> None:
+    screenshot = func()
+    loc, w, h, imgBGR = convertToGrayscale(screenshot, f'{IMAGES}{image}', threshold)
 
     for pt in zip(*loc[::-1]):
         cv2.rectangle(imgBGR, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
-        x = random.randrange(iWidth, iWidth + iSpace) + cropX
-        y = random.randrange(iHeight, iHeight + iSpace) + cropY
+        x = random.randrange(iWidth - iSpace, iWidth + iSpace) + cropX
+        y = random.randrange(iHeight - iSpace, iHeight + iSpace) + cropY
         iCoord = pt[0] + iHeight + x
         iCoord = (iCoord, pt[1] + iWidth + y)
         moveToClick(iCoord[0], iCoord[1], (0.2, 0.7), (0.1, 0.3), clicker)
 
-    # cv2.imshow('image', np.hstack([imgBGR, imgGRAY]))
-    # cv2.waitKey(0)
 
-
-def imageRectClicker(image, iHeight, iWidth, threshold, clicker, iSpace = 20, cropX = 0, cropY = 0) -> None:
-    screenshotWin()
-    loc, w, h, imgBGR = convertToGrayscale(f'{TEMP}screenshot.png', f'{IMAGES}{image}', threshold)
-
-    for pt in zip(*loc[::-1]):
-        cv2.rectangle(imgBGR, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
-        x = random.randrange(iWidth, iWidth + iSpace) + cropX
-        y = random.randrange(iHeight, iHeight + iSpace) + cropY
-        iCoord = pt[0] + iHeight + x
-        iCoord = (iCoord, pt[1] + iWidth + y)
-        moveToClick(iCoord[0], iCoord[1], (0.1, 0.3), (0.05, 0.15), clicker)
+def isImageInRect(image, func, threshold = 0.8) -> None:
+    screenshot = func()
+    loc, _, _, _ = convertToGrayscale(screenshot, f'{IMAGES}{image}', threshold)
+    if loc[0] != 0 and loc[1] != 0:
+        return True
+    else:
+        return False
 
 
 def imageCount(object, threshold = 0.8, left = 0, top = 0, right = 0, bottom = 0) -> int:
@@ -107,3 +100,4 @@ def convertToGrayscale(searchArea, target, threshold):
     res = cv2.matchTemplate(imgGRAY, template, cv2.TM_CCOEFF_NORMED)
     loc = np.where(res >= threshold)
     return loc, w, h, imgBGR
+

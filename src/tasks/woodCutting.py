@@ -2,19 +2,15 @@ import pyautogui, random, time, cv2
 import numpy as np
 
 from src.utils.settings import *
+from src.utils.bank import depositAllItems, exitBank
 from src.utils.detection import imageToText, imageRectClicker, inventCount, skillLevelUp
 from src.utils.colorDetection import findObject
 from src.utils.window import workAreaImage, actionImage, inventCrop
-from src.utils.breaks import randomBreaks, _randomBreak
+from src.utils.breaks import randomBreaks, _randomBreak, timer
 from src.utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth
 
 
 j = 0
-
-
-def timer():
-    startTime = time.time()
-    return startTime
 
 
 def randomizer(timerBreaks, iBreaks):
@@ -34,24 +30,12 @@ def countNests():
     return inventCount('birdNest.png')
 
 
-def moveDepositAll():
-    bX = random.randrange(455 - 5, 455 + 5)
-    bY = random.randrange(379 - 5, 379 + 5)
-    moveToClick(bX, bY, (0.1, 0.3), (0.05, 0.15))
-
-
-def closeButton():
-    x = random.randrange(496 - 5, 496 + 5)
-    y = random.randrange(87 - 5, 87 + 5)
-    moveToClick(x, y, (0.1, 0.3), (0.05, 0.15))
-
-
 def doBanking():
     global j
-    moveDepositAll()
+    depositAllItems()
     randomBreaks(1, 2)
 
-    closeButton()
+    exitBank()
     randomBreaks(1, 2)
     j += 1
     print(f'banked {j} times')

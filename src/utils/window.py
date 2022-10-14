@@ -1,3 +1,4 @@
+import pyautogui
 import win32gui
 from time import sleep
 from .settings import *
@@ -49,6 +50,7 @@ def getLogoutButton(windowSize: list[int]) -> list[int]:
 
 
 def inventCrop():
+    pyautogui.press('esc')
     return screenshotWin(562, 270, 755, 535, 'inventShot.png')
 
 
