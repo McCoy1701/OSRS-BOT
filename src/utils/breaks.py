@@ -57,4 +57,6 @@ def randomizer(timerBreaks, iBreaks):
     # test = timer()
     # print(f'{iBreaks, timerBreaks} test: {test - timerBreaks} {test - timerBreaks > iBreaks}')
     if _randomBreak(timerBreaks, iBreaks):
-        return timer(), random.randrange(300, 600)               # timerBreaks, iBreaks
+        timerBreak = timer()
+        iBreak = random.randrange(300, 600)
+        return timerBreak, iBreak               # timerBreaks, iBreaks

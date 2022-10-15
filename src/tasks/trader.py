@@ -5,24 +5,18 @@ from src.utils.bank import depositSecondItem
 from src.utils.detection import isImageInRect, inventCount, skillLevelUp
 from src.utils.colorDetection import findObject
 from src.utils.window import screenshotWin
-from src.utils.breaks import randomBreaks, _randomBreak, timer
-from src.utils.support import shiftClick, logMsg, moveToWithVar
+from src.utils.breaks import randomBreaks, randomizer
+from src.utils.support import logMsg, moveToWithVar
 
 
 timerBreak = timer()
 iBreak = random.randrange(300, 600)
 
 
-def randomizer(timerBreaks, iBreaks):
-    global timerBreak, iBreak
-    if _randomBreak(timerBreaks, iBreaks):
-        timerBreak = timer()
-        iBreak = random.randrange(300, 600)
-
-
 def threadTrader():
+    global timerBreak, iBreak
     while True:
-        randomizer(timerBreak, iBreak)
+        timerBreak, iBreak = randomizer(timerBreak, iBreak)
         randomBreaks(0.5, 1)
         findObject(5)
         logMsg('Finding Rommik', True)
@@ -30,14 +24,14 @@ def threadTrader():
 
         if isImageInRect('craftySupply.png', screenshotWin):
 
-            moveToWithVar(291, 148)
+            moveToWithVar(291, 148, True)
             logMsg('Buying Needles', True)
             randomBreaks(1, 2)
 
             for x in range(10):
                 logMsg(f'Buying Threads {x + 1}', True)
                 randomBreaks(0.1, 0.2)
-                clickSpot(339, 148)
+                moveToWithVar(339, 148, True)
 
             randomBreaks(1, 2)
             moveToWithVar(500, 110)
@@ -54,8 +48,9 @@ def threadTrader():
 
 
 def eyeTrader():
+    global timerBreak, iBreak
     while True:
-        randomizer(timerBreak, iBreak)
+        timerBreak, iBreak = randomizer(timerBreak, iBreak)
         randomBreaks(0.5, 1)
         findObject(5)
         logMsg('Finding Betty', True)
@@ -63,7 +58,7 @@ def eyeTrader():
 
         if isImageInRect('bettyMagic.png', screenshotWin):
 
-            moveToWithVar(437, 198)
+            moveToWithVar(437, 198, True)
             logMsg('Buying Eye of Newt Pack', True)
 
             randomBreaks(1, 2)

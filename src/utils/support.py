@@ -15,6 +15,21 @@ def pressKey(key, x, y):
     pyautogui.keyDown(key)
 
 
+def shiftClick(x, y):
+    pyautogui.keyDown('shift')
+    moveToClick(x, y, (0.02, 0.07), (0.01, 0.05))
+    pyautogui.keyUp('shift')
+
+
+def moveToWithVar(a, b, _shiftClick: bool = False, vari = 5, clicker = 'left'):
+    x = random.randrange(a - vari, a + vari)
+    y = random.randrange(b - vari, b + vari)
+    if not _shiftClick:
+        moveToClick(x, y, (0.1, 0.2), (0.01, 0.05), clicker)
+    else:
+        shiftClick(x, y)
+
+
 def dropItem():
     pressKey('shift', 0.059, 0.069)
 
@@ -26,27 +41,16 @@ def releaseDropItem():
     randomBreaks(0.2, 0.3)
 
 
-def pickItem(v, u):
-    x = random.randrange(v - 7, v + 7)
-    y = random.randrange(u - 7, u + 7)
-    moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
-    # print(f'Picked Item: X, Y: {x, y}')
-
-
 def pointNorth():
-    x = random.randrange(617 - 10, 617 + 10)
-    y = random.randrange(89 - 10, 89 + 10)
-    moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
+    moveToWithVar(617, 89)
 
 
 def toggleRun():
-    x = random.randrange(580 - 10, 580 + 10)
-    y = random.randrange(191 - 10, 191 + 10)
-    moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
+    moveToWithVar(580, 191)
 
 
 def clickPrayer():
-    moveToClick(x, y, (0.2, 0.6), (0.05, 0.15))
+    moveToWithVar(x, y)
 
 
 def tiltUp():
@@ -70,21 +74,13 @@ def spaces(a):
         pressKey('space', 0.05, 0.1)
 
 
-def shiftClick(x, y):
-    pyautogui.keyDown('shift')
-    moveToClick(x, y, (0.02, 0.07), (0.01, 0.05))
-    randomBreaks(0.1, 0.5)
-    pyautogui.keyUp('shift')
-
-
-def moveToWithVar(a, b, vari = 5):
-    x = random.randrange(a - vari, a + vari)
-    y = random.randrange(b - vari, b + vari)
-    moveToClick(x, y, (0.1, 0.2), (0.01, 0.05))
+def clear():
+    os.system('cls')
 
 
 def logMsg(msg: str, overwrite: bool = False):
     if not overwrite:
+        clear()
         print(f'\n{msg}')
 
     else:

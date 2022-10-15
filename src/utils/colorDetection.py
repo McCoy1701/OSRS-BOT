@@ -1,7 +1,7 @@
 import numpy as np
 import cv2, random
 from .window import screenshotWin, workAreaImage, getCenterScreen, getCenterMinimap, getWindow
-from .support import moveToClick, logMsg
+from .support import moveToWithVar, logMsg
 from .settings import *
 
 
@@ -29,7 +29,7 @@ def getContourPosition(contour):
     return centerX, centerY
 
 
-def findObject(object, cropX = 10, cropY = 40):
+def findObject(object, vari = 1, cropX = 10, cropY = 40):
     screenshotWin()
     image = cv2.imread(f'{TEMP}screenshot.png')
     contours = findContour(image, object)
@@ -37,9 +37,7 @@ def findObject(object, cropX = 10, cropY = 40):
     if len(contours) != 0:
         c = max(contours, key=cv2.contourArea)
         x , y = getContourPosition(c)
-        x1 = random.randrange(x - 1, x + 1)
-        y1 = random.randrange(y - 1, y + 1)
-        moveToClick(x1 + cropX, y1 + cropY, (0.1, 0.2), (0.01, 0.05))
+        moveToWithVar(x + cropX, y + cropY, False, vari)
 
 
 def getNearest():
