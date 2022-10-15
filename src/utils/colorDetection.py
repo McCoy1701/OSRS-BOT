@@ -1,7 +1,7 @@
 import numpy as np
 import cv2, random
 from .window import screenshotWin, workAreaImage, getCenterScreen, getCenterMinimap, getWindow
-from .support import moveToClick
+from .support import moveToClick, logMsg
 from .settings import *
 
 
@@ -29,22 +29,7 @@ def getContourPosition(contour):
     return centerX, centerY
 
 
-def findObject(item, cropX = 10, cropY = 40):
-    screenshotWin()
-    image = cv2.imread(f'{TEMP}screenshot.png')
-    contours = findContour(image, item)
-
-    if len(contours) != 0:
-        c = max(contours, key=cv2.contourArea)
-        x, y, w, h = cv2.boundingRect(c)
-
-        x = random.randrange(x + 2, x + max(w - 2, 3)) + cropX
-        y = random.randrange(y + 2, y + max(h - 2, 3)) + cropY
-        # print(f'Found Item: {item} at X, y:{x, y}')
-        moveToClick(x, y, (0.02, 0.04), (0.001, 0.005))
-
-
-def findObjectPrecise(object, cropX = 10, cropY = 40):
+def findObject(object, cropX = 10, cropY = 40):
     screenshotWin()
     image = cv2.imread(f'{TEMP}screenshot.png')
     contours = findContour(image, object)
@@ -55,3 +40,32 @@ def findObjectPrecise(object, cropX = 10, cropY = 40):
         x1 = random.randrange(x - 1, x + 1)
         y1 = random.randrange(y - 1, y + 1)
         moveToClick(x1 + cropX, y1 + cropY, (0.1, 0.2), (0.01, 0.05))
+
+
+def getNearest():
+    screenshotWin()
+    image = cv2.imread(f'{TEMP}screenshot.png')
+    contours = findContour(image, object)
+
+    centers = []
+    for cont in contours:
+        x, y = getContourPosition(cont)
+        if x != 0 and y != 0:
+            centers.append((x, y))
+
+    if not centers:
+        logMsg('Nothing Found', True)
+        return
+
+    dims = image.shape
+    nearest = getNearestPoint((int(dims[1] / 2), int(dims[0] / 2)), centers)
+    return nearest.x + 10, nearest.y + 40
+
+
+def getNearestPoint(point: tuple, points: list) -> tuple:
+    point = (point.x, point.y)
+    nodes = np.asarray(points)
+    dist2 = np.sum((nodes - point) **2, axis=1)
+    p = np.argmin(dist2)
+    return points[p][0], points[p][1]
+

@@ -3,20 +3,20 @@ import numpy as np
 
 from src.utils.settings import *
 from src.utils.bank import depositAllItems, exitBank
-from src.utils.detection import imageToText, imageRectClicker, inventCount, skillLevelUp
+from src.utils.detection import imageToText, imageRectSingle, inventCount, skillLevelUp
 from src.utils.colorDetection import findObject
-from src.utils.window import workAreaImage, actionImage, inventCrop
+from src.utils.window import actionImage
 from src.utils.breaks import randomBreaks, _randomBreak, timer
-from src.utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth
+from src.utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth, logMsg
 
 
 j = 0
+timerBreak = timer()
+iBreak = random.randrange(300, 600)
 
 
 def randomizer(timerBreaks, iBreaks):
     global timerBreak, iBreak
-    # test = timer()
-    # print(f'{iBreaks, timerBreaks} test: {test - timerBreaks} {test - timerBreaks > iBreaks}')
     if _randomBreak(timerBreaks, iBreaks):
         timerBreak = timer()
         iBreak = random.randrange(300, 600)
@@ -32,24 +32,26 @@ def countNests():
 
 def doBanking():
     global j
+    logMsg(f'Depositing', True)
     depositAllItems()
     randomBreaks(1, 2)
 
+    logMsg(f'Exited Bank', True)
     exitBank()
     randomBreaks(1, 2)
+    logMsg(f'Banked {j + 1} times', True)
     j += 1
-    print(f'banked {j} times')
 
 
 def dropWood(type):
     global j
-    print(f'Dropping...')
+    logMsg(f'Dropping...', True)
     inventCrop()
     dropItem()
-    imageRectClicker(f'{type}.png', 5, 5, 0.9, 'left', 10, 10, 40)
+    imageRectSingle(f'{type}.png', 5, 5, 0.9, 'left', 10, 10, 40)
     releaseDropItem()
+    logMsg(f'Finished Dropping! Dropped {j + 1} times', True)
     j += 1
-    print(f'Finished Dropping! Dropped {j} times')
 
 
 def powerWoodcutting(type, logs):
@@ -60,32 +62,32 @@ def powerWoodcutting(type, logs):
         nest = countNests()
 
         inventory = log + nest
-        # print(f'{inventory}')
+        logMsg(f'Inventory: {inventory}', True)
 
         if inventory > 27:
             # pointNorth()
             randomBreaks(0.5, 1)
+            logMsg(f'Finding Bank', True)
             findObject(4)
 
             randomBreaks(9, 10)
             # dropWood(logs)
+            logMsg(f'Banking {logs}', True)
             doBanking()
 
 
         actionImage()
         status = imageToText('thresh', f'{TEMP}actionScaled.png')
         text = status.strip('~-—')
-        # print(f'{text}')
+        logMsg(f'Action Read: {text}', True)
 
         if text.lower() != 'woodcutting':
-            # print(f'{text.lower()}')
+            logMsg(f'{text.lower()} matched woodcutting', True)
             findObject(type)
+            logMsg(f'Finding Tree', True)
             randomBreaks(6, 9)
 
         if skillLevelUp() != 0:
+            logMsg(f'Level up', True)
             spaces(2)
-
-actionImage()
-timerBreak = timer()
-iBreak = random.randrange(300, 600)
 

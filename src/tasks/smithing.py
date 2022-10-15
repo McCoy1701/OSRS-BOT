@@ -3,11 +3,11 @@ import numpy as np
 
 from src.utils.settings import *
 from src.utils.bank import pickGold, depositSecondItem, exitBank, pickBronzeBar, pickIronBar, pickSteelBar, pickMithrilBar
-from src.utils.detection import imageToText, isImageInRect, inventCount, imageCount, skillLevelUp
-from src.utils.colorDetection import findObjectPrecise
-from src.utils.window import screenshotWin, actionImage, inventCrop
+from src.utils.detection import isImageInRect, inventCount, skillLevelUp
+from src.utils.colorDetection import findObject
+from src.utils.window import screenshotWin
 from src.utils.breaks import randomBreaks, _randomBreak, timer
-from src.utils.support import spaces, moveToClick, pressKey, toggleRun, logMsg
+from src.utils.support import spaces, toggleRun, logMsg, moveToWithVar
 
 
 pickOptions = {0: pickBronzeBar, 1: pickIronBar, 2: pickSteelBar, 3: pickMithrilBar, 4: pickGold}
@@ -23,12 +23,6 @@ def randomizer(timerBreaks, iBreaks):
         iBreak = random.randrange(300, 600)
 
 
-def moveToBank(a, b, vari):
-    x = random.randrange(a - vari, a + vari)
-    y = random.randrange(b - vari, b + vari)
-    moveToClick(x, y, (0.1, 0.2), (0.01, 0.05))
-
-
 def smithItems(bar, cost):
     global pickOptions, barList, j
 
@@ -36,7 +30,7 @@ def smithItems(bar, cost):
         randomizer(timerBreak, iBreak)
         randomBreaks(1, 5)
         logMsg('Finding Bank', True)
-        findObjectPrecise(0)
+        findObject(0)
         randomBreaks(1.5, 2)
         logMsg('Depositing Items', True)
         depositSecondItem()
@@ -54,7 +48,7 @@ def smithItems(bar, cost):
 
         randomBreaks(0.8, 1.2)
         logMsg('Finding Furnace', True)
-        findObjectPrecise(1)
+        findObject(1)
         logMsg('Moving to Furnace', True)
         randomBreaks(9, 10)
 
@@ -62,26 +56,28 @@ def smithItems(bar, cost):
             logMsg('clicked Space', True)
             spaces(1)
 
-
-        while invo > cost - 1:
-            logMsg('Working...', True)
-            if skillLevelUp() != 0:
-                logMsg('level up', True)
-                a = random.randrange(2, 3)
-                spaces(a)
-                randomBreaks(1, 2)
-                findObjectPrecise(1)
-                logMsg('Finding Furnace, Again', True)
-                randomBreaks(1, 2)
-                if isImageInRect('craftingMenu.png', screenshotWin):
-                    spaces(1)
-                    logMsg('Clicking Space', True)
-            invo = inventCount(barList[bar])
+            while invo > cost - 1:
+                logMsg('Working...', True)
+                if skillLevelUp() != 0:
+                    logMsg('level up', True)
+                    a = random.randrange(2, 3)
+                    spaces(a)
+                    randomBreaks(1, 2)
+                    findObject(1)
+                    logMsg('Finding Furnace, Again', True)
+                    randomBreaks(1, 2)
+                    if isImageInRect('craftingMenu.png', screenshotWin):
+                        spaces(1)
+                        logMsg('Clicking Space', True)
+                invo = inventCount(barList[bar])
+        else:
+            logMsg('Miss Click', True)
+            continue
 
         toggleRun()
         logMsg('Enable Running', True)
         randomBreaks(0.5, 1)
-        moveToBank(606, 169, 5)
+        moveToWithVar(606, 169, 5)
         logMsg('Moving to Bank', True)
         randomBreaks(5, 5.2)
         logMsg(f'Finished {j + 1} runs')

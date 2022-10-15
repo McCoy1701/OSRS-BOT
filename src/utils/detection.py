@@ -1,5 +1,5 @@
 import numpy as np
-import cv2, pyautogui, random, win32gui, os, pytesseract, atexit
+import cv2, pyautogui, random, win32gui, os, pytesseract
 from PIL import Image
 from .window import screenshotWin, workAreaImage, inventCrop
 from .support import moveToClick
@@ -76,10 +76,6 @@ def inventCount(object, threshold = 0.8)-> int:
         cv2.rectangle(imgBGR, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
         counter += 1
     return counter
-
-
-def inventoryEnabled() -> int:
-    return imageCount(f'{IMAGES}inventoryEnabled.png', threshold=0.95)
 
 
 def skillLevelUp() -> int:

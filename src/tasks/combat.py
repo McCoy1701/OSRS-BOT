@@ -5,7 +5,7 @@ from src.utils.detection import imageToText, skillLevelUp
 from src.utils.colorDetection import findObject
 from src.utils.window import screenshotWin, attackImage
 from src.utils.breaks import randomBreaks, _randomBreak
-from src.utils.support import spaces, moveToClick
+from src.utils.support import spaces, moveToClick, logMsg
 from src.utils.settings import *
 
 j = 0
@@ -34,12 +34,14 @@ def powerAttack(monster = 'chicken'):
 
         if status.lower() != monster:
             # print(f'{status.lower()}')
-            screenshotWin()
             findObject(4)
             randomBreaks(6, 8)
 
-        if skillLevelUp() != 0:
-            spaces(2)
+            if skillLevelUp() != 0:
+                spaces(2)
+        else:
+            logMsg('Miss click')
+            continue
 
 attackImage()
 timerBreak = timer()

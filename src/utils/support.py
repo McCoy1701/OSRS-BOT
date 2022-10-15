@@ -77,6 +77,12 @@ def shiftClick(x, y):
     pyautogui.keyUp('shift')
 
 
+def moveToWithVar(a, b, vari = 5):
+    x = random.randrange(a - vari, a + vari)
+    y = random.randrange(b - vari, b + vari)
+    moveToClick(x, y, (0.1, 0.2), (0.01, 0.05))
+
+
 def logMsg(msg: str, overwrite: bool = False):
     if not overwrite:
         print(f'\n{msg}')
