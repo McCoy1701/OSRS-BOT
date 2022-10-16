@@ -1,12 +1,12 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from src.utils.detection import imageToText, skillLevelUp
-from src.utils.colorDetection import findObject
-from src.utils.window import screenshotWin, attackImage
-from src.utils.breaks import randomBreaks, _randomBreak
-from src.utils.support import spaces, moveToClick, logMsg
-from src.utils.settings import *
+from utils.detection import imageToText, skillLevelUp
+from utils.colorDetection import findObject
+from utils.window import screenshotWin, attackImage
+from utils.breaks import randomBreaks, _randomBreak
+from utils.support import spaces, moveToClick, logMsg
+from utils.settings import *
 
 j = 0
 

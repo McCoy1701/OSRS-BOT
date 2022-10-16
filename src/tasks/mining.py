@@ -1,10 +1,10 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from src.utils.detection import imageToText, imageRectClicker, inventCount, imageCount, findAreaSingle
-from src.utils.screen import workAreaImage, resizeImage, inventCrop
-from src.utils.breaks import randomBreaks, randomizer
-from src.utils.support import spaces, dropItem, releaseDropItem
+from utils.detection import imageToText, imageRectClicker, inventCount, imageCount, findAreaSingle
+from utils.screen import workAreaImage, resizeImage, inventCrop
+from utils.breaks import randomBreaks, randomizer
+from utils.support import spaces, dropItem, releaseDropItem
 
 j = 0
 

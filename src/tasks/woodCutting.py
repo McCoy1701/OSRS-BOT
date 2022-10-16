@@ -1,13 +1,13 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from src.utils.settings import *
-from src.utils.bank import depositAllItems, exitBank
-from src.utils.detection import imageToText, imageRectSingle, inventCount, skillLevelUp
-from src.utils.colorDetection import findObject
-from src.utils.window import actionImage
-from src.utils.breaks import randomBreaks, _randomBreak, timer
-from src.utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth, logMsg
+from utils.settings import *
+from utils.bank import depositAllItems, exitBank
+from utils.detection import imageToText, imageRectSingle, inventCount, skillLevelUp
+from utils.colorDetection import findObject
+from utils.window import actionImage
+from utils.breaks import randomBreaks, _randomBreak, timer
+from utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth, logMsg
 
 
 j = 0

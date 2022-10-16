@@ -1,6 +1,6 @@
 import cv2, pyautogui, random
-from src.utils.support import moveToWithVar
-from src.utils.breaks import randomBreaks
+from utils.support import moveToWithVar
+from utils.breaks import randomBreaks
 
 
 def exitBank():

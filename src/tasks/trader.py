@@ -1,12 +1,12 @@
 import pyautogui, random
 
-from src.utils.settings import *
-from src.utils.bank import depositSecondItem
-from src.utils.detection import isImageInRect, inventCount, skillLevelUp
-from src.utils.colorDetection import findObject
-from src.utils.window import screenshotWin
-from src.utils.breaks import randomBreaks, randomizer
-from src.utils.support import logMsg, moveToWithVar
+from utils.settings import *
+from utils.bank import depositSecondItem
+from utils.detection import isImageInRect, inventCount, skillLevelUp
+from utils.colorDetection import findObject
+from utils.window import screenshotWin
+from utils.breaks import randomBreaks, randomizer
+from utils.support import logMsg, moveToWithVar
 
 
 timerBreak = timer()
