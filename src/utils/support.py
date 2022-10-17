@@ -1,8 +1,9 @@
 import pyautogui, random, os
-from .breaks import randomBreaks
+from ..utils.breaks import randomBreaks
+from ..utils.window import mouseClickImage
 
 
-def moveToClick(x, y, fst: tuple, sec: tuple, clicker='left') -> None:
+def moveToClick(x, y, fst: tuple, sec: tuple, clicker = 'left') -> None:
     b = random.uniform(fst[0], fst[1])
     pyautogui.moveTo(x, y, duration=b)
     b = random.uniform(sec[0], sec[1])
@@ -21,13 +22,19 @@ def shiftClick(x, y):
     pyautogui.keyUp('shift')
 
 
-def moveToWithVar(a, b, _shiftClick: bool = False, vari = 5, clicker = 'left'):
+def moveToWithVar(a, b, _shiftClick: bool = False, fast: bool = False, vari = 5, clicker = 'left'):
     x = random.randrange(a - vari, a + vari)
     y = random.randrange(b - vari, b + vari)
-    if not _shiftClick:
-        moveToClick(x, y, (0.1, 0.2), (0.01, 0.05), clicker)
+    if not fast:
+        if not _shiftClick:
+            moveToClick(x, y, (0.1, 0.2), (0.01, 0.05), clicker)
+        else:
+            shiftClick(x, y)
     else:
-        shiftClick(x, y)
+        if not _shiftClick:
+            moveToClick(x, y, (0.001, 0.002), (0.0001, 0.0005), clicker)
+        else:
+            shiftClick(x, y)
 
 
 def dropItem():

@@ -1,12 +1,12 @@
 import pyautogui, random
 
-from utils.settings import *
-from utils.bank import depositSecondItem, exitBank
-from utils.detection import imageToText, isImageInRect, inventCount, skillLevelUp
-from utils.colorDetection import findObject
-from utils.window import screenshotWin
-from utils.breaks import randomBreaks, _randomBreak, timer
-from utils.support import spaces, moveToClick, pressKey, toggleRun, logMsg, dropItem, releaseDropItem, moveToWithVar
+from ..utils.settings import *
+from ..utils.bank import depositSecondItem, exitBank
+from ..utils.detection import imageToText, isImageInRect, inventCount, skillLevelUp
+from ..utils.colorDetection import findObject
+from ..utils.window import screenshotWin
+from ..utils.breaks import randomBreaks, _randomBreak, timer
+from ..utils.support import spaces, moveToClick, pressKey, toggleRun, logMsg, dropItem, releaseDropItem, moveToWithVar
 
 
 def randomizer(timerBreaks, iBreaks):

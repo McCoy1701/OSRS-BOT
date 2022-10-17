@@ -1,7 +1,7 @@
 import pyautogui
 import win32gui
 from time import sleep
-from .settings import *
+from ..utils.settings import *
 from PIL import Image, ImageGrab
 
 wnd = 0
@@ -73,6 +73,11 @@ def healthImage():
     return scaleImage(health)
 
 
+def mouseClickImage():
+    x, y = pyautogui.position()
+    return screenshotWin(x - 10, y - 10, x + 10, y + 10, 'mouseClick.png')
+
+
 def workAreaImage():
     return screenshotWin(15, 80, 540, 400, 'workArea.png')
 
@@ -81,8 +86,10 @@ def actionImage():
     action = screenshotWin(40, 90, 135, 115, 'action.png')
     return scaleImage(action)
 
+
 def attackImage():
-    attack = screenshotWin(75, 90, 100, 110, 'attack.png')
+    # attack = screenshotWin(50, 95, 120, 110, 'attack.png')
+    attack = screenshotWin(75, 95, 100, 110, 'attack.png')
     return scaleImage(attack)
 
 
@@ -92,7 +99,7 @@ def scaleImage(img):
     newSize = (width * 6, height * 6)
     iml = im.resize(newSize)
     text = img.rsplit('.', 1)
-    sleep(0.01)
+    sleep(0.02)
     iml.save(fr'{text[0]}Scaled.png')
     return iml
 

@@ -1,15 +1,15 @@
 import numpy as np
 import cv2, pyautogui, random, win32gui, os, pytesseract
 from PIL import Image
-from .window import screenshotWin, workAreaImage, inventCrop
-from .support import moveToClick
-from .settings import *
+from ..utils.window import screenshotWin, workAreaImage, inventCrop
+from ..utils.support import moveToClick
+from ..utils.settings import *
 
 
 pytesseract.pytesseract.tesseract_cmd = r'D:\Program Files\Tesseract-OCR\tesseract'
 
 
-def imageToText(preprocess, image, parse_config = '--psm 8') -> str:
+def imageToText(preprocess, image, parse_config = '--psm 7') -> str:
     image = cv2.imread(image)
     image = cv2.bitwise_not(image)
     GRAY = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

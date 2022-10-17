@@ -1,8 +1,8 @@
 import numpy as np
 import cv2, random
-from .window import screenshotWin, workAreaImage, getCenterScreen, getCenterMinimap, getWindow
-from .support import moveToWithVar, logMsg
-from .settings import *
+from ..utils.window import screenshotWin, workAreaImage, getCenterScreen, getCenterMinimap, getWindow
+from ..utils.support import moveToWithVar, logMsg
+from ..utils.settings import *
 
 
 def findContour(image, color: int):
@@ -29,7 +29,7 @@ def getContourPosition(contour):
     return centerX, centerY
 
 
-def findObject(object, vari = 1, cropX = 10, cropY = 40):
+def findObject(object, fast :bool = False, vari = 1, cropX = 10, cropY = 40):
     screenshotWin()
     image = cv2.imread(f'{TEMP}screenshot.png')
     contours = findContour(image, object)
@@ -37,10 +37,10 @@ def findObject(object, vari = 1, cropX = 10, cropY = 40):
     if len(contours) != 0:
         c = max(contours, key=cv2.contourArea)
         x , y = getContourPosition(c)
-        moveToWithVar(x + cropX, y + cropY, False, vari)
+        moveToWithVar(x + cropX, y + cropY, False, fast, vari)
 
 
-def getNearest():
+def getNearest(object, fast: bool = False, vari = 1):
     screenshotWin()
     image = cv2.imread(f'{TEMP}screenshot.png')
     contours = findContour(image, object)
@@ -57,11 +57,11 @@ def getNearest():
 
     dims = image.shape
     nearest = getNearestPoint((int(dims[1] / 2), int(dims[0] / 2)), centers)
-    return nearest.x + 10, nearest.y + 40
+    moveToWithVar(nearest[0] + 10, nearest[1] + 40, False, fast, vari)
 
 
 def getNearestPoint(point: tuple, points: list) -> tuple:
-    point = (point.x, point.y)
+    point = (point[0], point[1])
     nodes = np.asarray(points)
     dist2 = np.sum((nodes - point) **2, axis=1)
     p = np.argmin(dist2)

@@ -1,13 +1,13 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from utils.settings import *
-from utils.bank import pickGold, depositSecondItem, exitBank, pickBronzeBar, pickIronBar, pickSteelBar, pickMithrilBar
-from utils.detection import isImageInRect, inventCount, skillLevelUp
-from utils.colorDetection import findObject
-from utils.window import screenshotWin
-from utils.breaks import randomBreaks, _randomBreak, timer
-from utils.support import spaces, toggleRun, logMsg, moveToWithVar
+from ..utils.settings import *
+from ..utils.bank import pickGold, depositSecondItem, exitBank, pickBronzeBar, pickIronBar, pickSteelBar, pickMithrilBar
+from ..utils.detection import isImageInRect, inventCount, skillLevelUp
+from ..utils.colorDetection import findObject
+from ..utils.window import screenshotWin
+from ..utils.breaks import randomBreaks, _randomBreak, timer
+from ..utils.support import spaces, toggleRun, logMsg, moveToWithVar
 
 
 pickOptions = {0: pickBronzeBar, 1: pickIronBar, 2: pickSteelBar, 3: pickMithrilBar, 4: pickGold}
