@@ -1,7 +1,5 @@
-import pyautogui, random, time, cv2
-import numpy as np
+import random
 
-from ..utils.settings import *
 from ..utils.bank import pickGold, depositSecondItem, exitBank, pickBronzeBar, pickIronBar, pickSteelBar, pickMithrilBar
 from ..utils.detection import isImageInRect, inventCount, skillLevelUp
 from ..utils.colorDetection import findObject

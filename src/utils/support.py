@@ -1,5 +1,4 @@
-import pyautogui, random, os
-from ..utils.breaks import randomBreaks
+import pyautogui, random, os, time
 from ..utils.window import mouseClickImage
 
 
@@ -46,6 +45,12 @@ def releaseDropItem():
     randomBreaks(0.2, 0.3)
     pyautogui.press('shift')
     randomBreaks(0.2, 0.3)
+
+
+def randomBreaks(minSec, maxSec):
+    e = random.uniform(minSec, maxSec)
+    # print(f'{e}')
+    time.sleep(e)
 
 
 def pointNorth():

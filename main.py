@@ -1,4 +1,4 @@
-from src.utils.window import setWindow, mouseClickImage
+from src.utils.window import setWindow
 from src.tasks.woodCutting import powerWoodcutting
 from src.tasks.combat import powerAttack
 from src.tasks.gatherPickaxe import gatherPickaxes
@@ -15,7 +15,7 @@ def main():
     # threadTrader()
     # eyeTrader()
     # gatherPickaxes()
-    # powerWoodcutting(1, 'log')
+    powerWoodcutting(1, 'log')
     # powerAttack('cow')
     # powerFisher('salmon', 2)
     # powerMiner(3, True, 7)

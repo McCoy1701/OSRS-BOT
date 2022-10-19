@@ -1,8 +1,9 @@
 import pyautogui, random, time, cv2
 import numpy as np
 
-from ..utils.detection import imageToText, imageRectClicker, inventCount, imageCount, findAreaSingle
-from ..utils.screen import workAreaImage, resizeImage, inventCrop
+from ..utils.detection import imageToText, imageRectSingle, inventCount, imageCount, skillLevelUp
+from ..utils.colorDetection import findObject
+from ..utils.window import workAreaImage, actionImage, inventCrop
 from ..utils.breaks import randomBreaks, randomizer
 from ..utils.support import spaces, dropItem, releaseDropItem
 
@@ -13,7 +14,7 @@ def dropOre(type):
     print(f'Dropping...')
     inventCrop()
     dropItem()
-    imageRectClicker(f'{type}Ore.png', 5, 5, 0.9, 'left')
+    imageRectSingle(f'{type}Ore.png', 5, 5, 0.9, 'left')
     releaseDropItem()
     j += 1
     print(f'Finished Dropping! Dropped {j} times')
@@ -36,14 +37,14 @@ def powerMiner(ore, manual, num):
             dropOre(powerList[ore])
             randomBreaks(0.1, 0.2)
 
-        resizeImage()
+        actionImage()
         minedText = imageToText('thresh', 'images/textShot.png')
 
         if minedText.lower() != 'mining':
             # print(f'{newText}')
             randomBreaks(.5, 2)
             if manual:
-                findAreaSingle(num, 150, 150)
+                findObject(num, 150, 150)
         if skillLevelUp() != 0:
             randomBreaks(0.2, 3)
             pyautogui.press('space')

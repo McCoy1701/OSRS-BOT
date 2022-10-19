@@ -1,12 +1,12 @@
 import numpy as np
-import cv2, random
-from ..utils.window import screenshotWin, workAreaImage, getCenterScreen, getCenterMinimap, getWindow
+import cv2
+from ..utils.window import screenshotWin
 from ..utils.support import moveToWithVar, logMsg
 from ..utils.settings import *
 
 
 def findContour(image, color: int):
-    objects = [RED, GREEN, YELLOW, BLUE, PURPLE, PINK, PICKUP_HIGHLIGHT, ATTACK_BLUE]
+    objects = [RED, GREEN, BLUE, YELLOW, PURPLE, PICKUP_HIGHLIGHT]
 
     lower = objects[color][0]
     upper = objects[color][1]

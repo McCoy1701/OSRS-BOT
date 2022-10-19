@@ -1,7 +1,7 @@
 import numpy as np
-import cv2, pyautogui, random, win32gui, os, pytesseract
+import cv2, random, os, pytesseract
 from PIL import Image
-from ..utils.window import screenshotWin, workAreaImage, inventCrop
+from ..utils.window import screenshotWin, inventCrop
 from ..utils.support import moveToClick
 from ..utils.settings import *
 

@@ -1,16 +1,15 @@
-import pyautogui, random, time, cv2
-import numpy as np
+import random
 
 from ..utils.settings import *
-from ..utils.bank import depositAllItems, exitBank
+from ..utils.bank import doBanking
 from ..utils.detection import imageToText, imageRectSingle, inventCount, skillLevelUp
 from ..utils.colorDetection import findObject
 from ..utils.window import actionImage
-from ..utils.breaks import randomBreaks, _randomBreak, timer
-from ..utils.support import spaces, dropItem, releaseDropItem, logMsg
+from ..utils.breaks import _randomBreak, timer
+from ..utils.support import spaces, dropItem, releaseDropItem, logMsg, randomBreaks
 
 
-j = 0
+J = 0
 timerBreak = timer()
 iBreak = random.randrange(300, 600)
 
@@ -30,32 +29,25 @@ def countNests():
     return inventCount('birdNest.png')
 
 
-def doBanking():
-    global j
-    logMsg(f'Depositing', True)
-    depositAllItems()
-    randomBreaks(1, 2)
-
-    logMsg(f'Exited Bank', True)
-    exitBank()
-    randomBreaks(1, 2)
-    logMsg(f'Banked {j + 1} times', True)
-    j += 1
-
-
 def dropWood(type):
-    global j
+    global J
     logMsg(f'Dropping...', True)
-    inventCrop()
     dropItem()
     imageRectSingle(f'{type}.png', 5, 5, 0.9, 'left', 10, 10, 40)
     releaseDropItem()
     logMsg(f'Finished Dropping! Dropped {j + 1} times', True)
-    j += 1
+    J += 1
+
+
+def readActionImage() -> str:
+    actionImage()
+    status = imageToText('thresh', f'{TEMP}actionScaled.png')
+    text = status.strip('~-—')
+    logMsg(f'Action Read: {text}', True)
+    return text
 
 
 def powerWoodcutting(type, logs):
-    global timerBreak, iBreak
     while True:
         randomizer(timerBreak, iBreak)
         log = countLogs(logs)
@@ -64,11 +56,11 @@ def powerWoodcutting(type, logs):
         inventory = log + nest
         logMsg(f'Inventory: {inventory}', True)
 
-        if inventory > 27:
+        if inventory >= 27:
             # pointNorth()
             randomBreaks(0.5, 1)
             logMsg(f'Finding Bank', True)
-            findObject(0)
+            findObject(0, False, 10)
 
             randomBreaks(9, 10)
             # dropWood(logs)
@@ -76,14 +68,11 @@ def powerWoodcutting(type, logs):
             doBanking()
 
 
-        actionImage()
-        status = imageToText('thresh', f'{TEMP}actionScaled.png')
-        text = status.strip('~-—')
-        logMsg(f'Action Read: {text}', True)
+        text = readActionImage()
 
         if text.lower() != 'woodcutting':
             logMsg(f'{text.lower()} matched woodcutting', True)
-            findObject(type)
+            findObject(type, False, 10)
             logMsg(f'Finding Tree', True)
             randomBreaks(6, 9)
 

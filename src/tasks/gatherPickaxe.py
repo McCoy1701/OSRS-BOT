@@ -1,6 +1,5 @@
 import pyautogui, random
 
-from ..utils.settings import *
 from ..utils.bank import depositSecondItem, exitBank
 from ..utils.detection import imageToText, isImageInRect, inventCount, skillLevelUp
 from ..utils.colorDetection import findObject
