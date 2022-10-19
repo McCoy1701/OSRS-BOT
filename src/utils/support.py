@@ -91,5 +91,5 @@ def logMsg(msg: str, overwrite: bool = False):
         print(f'\n{msg}')
 
     else:
-        print(f'\r{msg}', end='')
+        print(f'\r{msg}' + '           ', end='')
 

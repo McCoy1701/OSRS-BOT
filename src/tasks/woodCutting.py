@@ -5,9 +5,9 @@ from ..utils.settings import *
 from ..utils.bank import depositAllItems, exitBank
 from ..utils.detection import imageToText, imageRectSingle, inventCount, skillLevelUp
 from ..utils.colorDetection import findObject
-from ..utils.window import actionImage, setWindow
+from ..utils.window import actionImage
 from ..utils.breaks import randomBreaks, _randomBreak, timer
-from ..utils.support import spaces, dropItem, releaseDropItem, moveToClick, pointNorth, logMsg
+from ..utils.support import spaces, dropItem, releaseDropItem, logMsg
 
 
 j = 0
@@ -68,7 +68,7 @@ def powerWoodcutting(type, logs):
             # pointNorth()
             randomBreaks(0.5, 1)
             logMsg(f'Finding Bank', True)
-            findObject(4)
+            findObject(0)
 
             randomBreaks(9, 10)
             # dropWood(logs)

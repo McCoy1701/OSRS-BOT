@@ -11,6 +11,7 @@ def setWindow(name):
     wnd = win32gui.FindWindow(None, name)
     win32gui.MoveWindow(wnd, 10, 40, 809, 534, True)
     win32gui.SetActiveWindow(wnd)
+    sleep(0.01)
     win32gui.SetForegroundWindow(wnd)
 
 
